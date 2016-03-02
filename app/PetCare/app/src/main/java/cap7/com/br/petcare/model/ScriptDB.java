@@ -1,0 +1,34 @@
+package cap7.com.br.petcare.model;
+
+/**
+ * Created by Virginia on 02/03/2016.
+ */
+public class ScriptDB {
+
+    // Database Name
+    public static String DATABASE_NAME = "petcare_database";
+
+   // Tabela Animal
+   public static final String TAB_ANIMAL = "animal";
+
+    public static final String ANIMAL_ID = "id";
+    public static final String ANIMAL_CODIGO = "codigo";
+    public static final String ANIMAL_NOME = "nome";
+    public static final String ANIMAL_NASCIMENTO = "nascimento";
+    public static final String ANIMAL_ESPECIE = "especie";
+    public static final String ANIMAL_SEXO = "sexo";
+    public static final String ANIMAL_RACA = "raca";
+    public static final String ANIMAL_COR = "cor";
+
+    // Animal Table Create Query
+    /**
+      CREATE TABLE animal ( id INTEGER PRIMARY KEY AUTOINCREMENT, codigo TEXT, nome TEXT,
+     nascimento TEXT, especie TEXT, sexo TEXT, raca TEXT, cor TEXT);
+     */
+
+    public static final String CREATE_TABLE_ANIMAL = "CREATE TABLE "
+            + TAB_ANIMAL + "(" + ANIMAL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + ANIMAL_CODIGO + " TEXT, "
+            + ANIMAL_NOME + " TEXT, " + ANIMAL_NASCIMENTO + " TEXT, " + ANIMAL_ESPECIE + " TEXT, "
+            + ANIMAL_SEXO + " TEXT, " + ANIMAL_RACA + " TEXT, " + ANIMAL_COR + " TEXT)";
+
+}
