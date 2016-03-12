@@ -3,9 +3,8 @@ package cap7.com.br.petcare.dao;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.provider.Settings;
 
-import cap7.com.br.petcare.model.ScriptDB;
+import cap7.com.br.petcare.Util.ScriptDB;
 
 /**
  * Created by Virginia on 02/03/2016.
@@ -31,10 +30,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(ScriptDB.CREATE_TABLE_ANIMAL);
+        db.execSQL(ScriptDB.CREATE_TABLE_PROPRIETARIO);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        db.execSQL("DROP TABLE IF EXISTS" + ScriptDB.TAB_PROPRIETARIO);
+        db.execSQL("DROP TABLE IF EXISTS" + ScriptDB.TAB_ANIMAL);
+        onCreate(db);
     }
 }

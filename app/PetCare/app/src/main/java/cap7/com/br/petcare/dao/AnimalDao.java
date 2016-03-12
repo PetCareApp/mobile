@@ -3,11 +3,8 @@ package cap7.com.br.petcare.dao;
 import android.content.ContentValues;
 import android.content.Context;
 
-import java.text.SimpleDateFormat;
-import java.util.Locale;
-
 import cap7.com.br.petcare.model.Animal;
-import cap7.com.br.petcare.model.ScriptDB;
+import cap7.com.br.petcare.Util.ScriptDB;
 
 /**
  * Created by Admin on 02/03/2016.

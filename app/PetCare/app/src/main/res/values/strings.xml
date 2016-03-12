@@ -12,4 +12,11 @@
     <string name="txt_imagem_pet">Imagem</string>
     <string name="btn_salvar_pet">Salvar</string>
 
+    <!-- Strings Cadastrar Proprietario -->
+    <string name="txt_nome_proprietario">Nome</string>
+    <string name="txt_email_proprietario">Email</string>
+    <string name="btn_salvar_proprietario">Salvar</string>
+
+    <!-- Strings Perfil Proprietario -->
+    <string name="txt_nome_perfil">Nome</string>
 </resources>

@@ -10,8 +10,9 @@ import android.database.sqlite.SQLiteDatabase;
 public class DBDao {
 
     protected SQLiteDatabase database;
-    private DatabaseHelper dbHelper;
+    protected DatabaseHelper dbHelper;
     private Context mContext;
+
 
     public DBDao(Context context) {
         this.mContext = context;
@@ -24,4 +25,13 @@ public class DBDao {
             dbHelper = DatabaseHelper.getHelper(mContext);
         database = dbHelper.getWritableDatabase();
     }
+
+    public SQLiteDatabase readableDB() throws SQLException {
+        if(dbHelper == null)
+            dbHelper = DatabaseHelper.getHelper(mContext);
+        database = dbHelper.getReadableDatabase();
+        return database;
+    }
+
+
 }
