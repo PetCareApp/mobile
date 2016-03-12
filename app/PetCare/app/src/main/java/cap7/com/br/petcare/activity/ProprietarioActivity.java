@@ -34,9 +34,9 @@ public class ProprietarioActivity extends AppCompatActivity {
         setContentView(R.layout.activity_proprietario);
 
         preferences = getSharedPreferences(Contrato.PREF_SETTINGS, 0);
-        String nome = preferences.getString("nomeProprietario", null);
-        String email = preferences.getString("emailProprietario", null);
-        int id = preferences.getInt("idProprietario", -1);
+        String nome = preferences.getString(Contrato.NOME_PROPRIETARIO_PREF, null);
+        String email = preferences.getString(Contrato.EMAIL_PROPRIETARIO_PREF, null);
+        int id = preferences.getInt(Contrato.ID_PROPRIETARIO_PREF, -1);
 
         if (nome != null && email != null){
             Intent it = new Intent(ProprietarioActivity.this, MainActivity.class);
@@ -64,9 +64,9 @@ public class ProprietarioActivity extends AppCompatActivity {
               proprietario.setId(cursor.getInt(cursor.getColumnIndexOrThrow(ScriptDB.PROPRIETARIO_ID_CURSOR)));
 
               SharedPreferences.Editor editor = preferences.edit();
-              editor.putString("nomeProprietario", proprietario.getNome());
-              editor.putString("emailProprietario", proprietario.getEmail());
-              editor.putInt("idProprietario", proprietario.getId());
+              editor.putString(Contrato.NOME_PROPRIETARIO_PREF, proprietario.getNome());
+              editor.putString(Contrato.EMAIL_PROPRIETARIO_PREF, proprietario.getEmail());
+              editor.putInt(Contrato.ID_PROPRIETARIO_PREF, proprietario.getId());
               editor.commit();
 
               Toast.makeText(getApplicationContext(), resultado, Toast.LENGTH_LONG).show();

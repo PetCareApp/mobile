@@ -70,9 +70,9 @@ public class ConsultaPerfilActivity extends AppCompatActivity {
 
                 preferences = getSharedPreferences(Contrato.PREF_SETTINGS, 0);
                 SharedPreferences.Editor editor = preferences.edit();
-                editor.putInt("idProprietario", proprietario.getId());
-                editor.putString("nomeProprietario", proprietario.getNome());
-                editor.putString("emailProprietario", proprietario.getEmail());
+                editor.putInt(Contrato.ID_PROPRIETARIO_PREF, proprietario.getId());
+                editor.putString(Contrato.NOME_PROPRIETARIO_PREF, proprietario.getNome());
+                editor.putString(Contrato.EMAIL_PROPRIETARIO_PREF, proprietario.getEmail());
                 editor.commit();
 
                 Log.d("JR", proprietario.getId() + "");
