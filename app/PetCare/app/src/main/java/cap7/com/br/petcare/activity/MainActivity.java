@@ -23,8 +23,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         preferences = getSharedPreferences(Contrato.PREF_SETTINGS, 0);
-         nome = preferences.getString("nomeProprietario", null);
-         id = preferences.getInt("idProprietario", -1);
+         nome = preferences.getString(Contrato.NOME_PROPRIETARIO_PREF, null);
+         id = preferences.getInt(Contrato.ID_PROPRIETARIO_PREF, -1);
 
         txtNomeProprietario = (TextView)findViewById(R.id.proprietarioNomePerfil);
         txtNomeProprietario.setText(nome);
@@ -44,14 +44,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        nome = preferences.getString("nomeProprietario", null);
-        id = preferences.getInt("idProprietario", -1);
+        nome = preferences.getString(Contrato.NOME_PROPRIETARIO_PREF, null);
+        id = preferences.getInt(Contrato.ID_PROPRIETARIO_PREF, -1);
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
-        nome = preferences.getString("nomeProprietario", null);
-        id = preferences.getInt("idProprietario", -1);
+        nome = preferences.getString(Contrato.NOME_PROPRIETARIO_PREF, null);
+        id = preferences.getInt(Contrato.ID_PROPRIETARIO_PREF, -1);
     }
 }
