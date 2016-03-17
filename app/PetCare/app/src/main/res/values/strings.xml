@@ -11,6 +11,8 @@
     <string name="txt_nascimento_pet">Nascimento</string>
     <string name="txt_imagem_pet">Imagem</string>
     <string name="btn_salvar_pet">Salvar</string>
+    <string name="btn_listar_pet">Listar</string>
+    <string name="txt_default_nome_pet">Pet</string>
 
     <!-- Strings Cadastrar Proprietario -->
     <string name="txt_nome_proprietario">Nome</string>

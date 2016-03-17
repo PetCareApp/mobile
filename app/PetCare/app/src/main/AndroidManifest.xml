@@ -8,15 +8,17 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.ProprietarioActivity">
+        <activity android:name=".activity.AnimalActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.AnimalActivity" />
+        <activity android:name=".activity.ProprietarioActivity" />
         <activity android:name=".activity.MainActivity" />
-        <activity android:name=".activity.ConsultaPerfilActivity"></activity>
+        <activity android:name=".activity.ConsultaPerfilActivity" />
+        <activity android:name=".activity.ConsultaAnimalActivity"></activity>
     </application>
+
 </manifest>
