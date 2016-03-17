@@ -1,5 +1,6 @@
 package cap7.com.br.petcare.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -7,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +30,7 @@ public class AnimalActivity extends AppCompatActivity {
     private EditText editRaca;
     private EditText editCor;
     private Button btnSalvar;
-
+    private Button btnListar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +62,17 @@ public class AnimalActivity extends AppCompatActivity {
         sexoAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinSexo.setAdapter(sexoAdapter);
 
+        //TODO refatorar
+        btnListar = (Button) findViewById(R.id.buttonTeste);
+        btnListar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent(AnimalActivity.this, ConsultaAnimalActivity.class);
+                it.putExtra("oi", "oi");
+                startActivity(it);
+                finish();
+            }
+        });
     }
 
     public void salvarAnimal(View view) {
@@ -70,7 +83,10 @@ public class AnimalActivity extends AppCompatActivity {
         animal.setRaca(editRaca.getText().toString());
         animal.setCor(editCor.getText().toString());
 
-        animalDao.save(animal);
+        long resposta = animalDao.save(animal);
+        if (resposta > -1){
+            Toast.makeText(this,"Animal cadastrado com suceso!",Toast.LENGTH_SHORT).show();
+        }
     }
 
 }

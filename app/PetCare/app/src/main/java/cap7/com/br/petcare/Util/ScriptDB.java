@@ -12,6 +12,7 @@ public class ScriptDB {
    public static final String TAB_ANIMAL = "animal";
 
     public static final String ANIMAL_ID = "id";
+    public static final String ANIMAL_ID_CURSOR = "_id";
     public static final String ANIMAL_CODIGO = "codigo";
     public static final String ANIMAL_NOME = "nome";
     public static final String ANIMAL_NASCIMENTO = "nascimento";

@@ -8,4 +8,7 @@ public class Contrato {
     public static final String NOME_PROPRIETARIO_PREF = "nomeProprietario";
     public static final String ID_PROPRIETARIO_PREF = "idProprietario";
     public static final String EMAIL_PROPRIETARIO_PREF = "emailProprietario";
+
+    //Contract animal
+    public static final String ID_ANIMAL_PREF = "idAnimal";
 }

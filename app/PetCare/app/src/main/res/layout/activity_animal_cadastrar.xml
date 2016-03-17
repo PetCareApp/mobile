@@ -103,11 +103,20 @@
 
     <Button
         android:layout_width="346dp"
-        android:layout_height="wrap_content"
+        android:layout_height="28dp"
         android:text="@string/btn_salvar_pet"
         android:id="@+id/btnPetSalvar"
         android:layout_gravity="center_horizontal"
         android:background="#50b1c7"
         android:onClick="salvarAnimal" />
+
+    <Button
+        android:layout_width="346dp"
+        android:layout_height="20dp"
+        android:text="New Button"
+        android:layout_marginTop="8dp"
+        android:layout_gravity="center_horizontal"
+        android:background="#50b1c7"
+        android:id="@+id/buttonTeste" />
 
 </LinearLayout>
