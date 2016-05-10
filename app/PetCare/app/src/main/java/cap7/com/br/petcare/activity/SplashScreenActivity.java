@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import cap7.com.br.petcare.R;
 
-public class SplashActivity extends AppCompatActivity
+public class SplashScreenActivity extends AppCompatActivity
         implements Runnable{
 
     @Override

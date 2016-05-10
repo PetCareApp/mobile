@@ -11,7 +11,7 @@ public class ScriptDB {
    // Tabela Animal
    public static final String TAB_ANIMAL = "animal";
 
-    public static final String ANIMAL_ID = "id";
+    public static final String ANIMAL_ID = "_id";
     public static final String ANIMAL_ID_CURSOR = "_id";
     public static final String ANIMAL_CODIGO = "codigo";
     public static final String ANIMAL_NOME = "nome";
@@ -34,17 +34,17 @@ public class ScriptDB {
 
 
     //Tabela Proprietario
-    public static final String TAB_PROPRIETARIO = "proprietario";
+    public static final String TAB_PROPRIETARIO_NOVO = "proprietario";
 
-    public static final String PROPRIETARIO_ID = "id";
+    public static final String PROPRIETARIO_ID = "_id";
     public static final String PROPRIETARIO_ID_CURSOR = "_id";
     public static final String PROPRIETARIO_NOME = "nome";
-    public static final String PROPRIETARIO_LOGIN = "login";
+    public static final String PROPRIETARIO_TELEFONE = "telefone";
     public static final String PROPRIETARIO_SENHA = "senha";
     public static final String PROPRIETARIO_EMAIL = "email";
 
-    public static final String CREATE_TABLE_PROPRIETARIO = "CREATE TABLE " + TAB_PROPRIETARIO +
-            "( " + PROPRIETARIO_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + PROPRIETARIO_LOGIN + " TEXT, "
+    public static final String CREATE_TABLE_PROPRIETARIO = "CREATE TABLE " + TAB_PROPRIETARIO_NOVO +
+            "( " + PROPRIETARIO_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + PROPRIETARIO_TELEFONE + " TEXT, "
             + PROPRIETARIO_NOME + " TEXT, " + PROPRIETARIO_SENHA + " TEXT, " + PROPRIETARIO_EMAIL + " TEXT)";
 
 

@@ -4,14 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import cap7.com.br.petcare.R;
 import cap7.com.br.petcare.dao.AnimalDao;
@@ -24,9 +20,11 @@ public class AnimalActivity extends AppCompatActivity {
 
     private AnimalDao animalDao;
 
-    private EditText editNome;
     private Spinner spinSexo;
     private Spinner spinEspecie;
+
+    private EditText editNome;
+
     private EditText editRaca;
     private EditText editCor;
     private Button btnSalvar;
@@ -39,28 +37,29 @@ public class AnimalActivity extends AppCompatActivity {
 
         animalDao = new AnimalDao(getBaseContext());
 
+
+        //spinSexo = (Spinner) findViewById(R.id.spinPetSexo);
+        //spinEspecie = (Spinner) findViewById(R.id.spinPetEspecie);
         editNome = (EditText) findViewById(R.id.editPetNome);
-        spinSexo = (Spinner) findViewById(R.id.spinPetSexo);
-        spinEspecie = (Spinner) findViewById(R.id.spinPetEspecie);
         editRaca = (EditText) findViewById(R.id.editPetRaca);
         editCor = (EditText) findViewById(R.id.editPetCor);
         btnSalvar = (Button) findViewById(R.id.btnPetSalvar);
 
-        List<String> especieList = new ArrayList<String>();
-        especieList.add(Animal.Especie.CACHORRO.toString());
-        especieList.add(Animal.Especie.GATO.toString());
+        //List<String> especieList = new ArrayList<String>();
+        //especieList.add(Animal.Especie.CACHORRO.toString());
+       // especieList.add(Animal.Especie.GATO.toString());
 
-        List<String> sexoList = new ArrayList<String>();
-        sexoList.add(Animal.Sexo.FEMEA.toString());
-        sexoList.add(Animal.Sexo.MACHO.toString());
+        //List<String> sexoList = new ArrayList<String>();
+        //sexoList.add(Animal.Sexo.FEMEA.toString());
+       // sexoList.add(Animal.Sexo.MACHO.toString());
 
-        ArrayAdapter<String> especieAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, especieList);
-        especieAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinEspecie.setAdapter(especieAdapter);
+       //ArrayAdapter<String> especieAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, especieList);
+        //especieAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //spinEspecie.setAdapter(especieAdapter);
 
-        ArrayAdapter<String> sexoAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, sexoList);
-        sexoAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinSexo.setAdapter(sexoAdapter);
+       // ArrayAdapter<String> sexoAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, sexoList);
+       // sexoAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+       // spinSexo.setAdapter(sexoAdapter);
 
         //TODO refatorar
         btnListar = (Button) findViewById(R.id.buttonTeste);

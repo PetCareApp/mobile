@@ -24,11 +24,10 @@ public class ProprietarioDao extends DBDao {
 
         ContentValues values = new ContentValues();
         values.put(ScriptDB.PROPRIETARIO_NOME, proprietario.getNome());
-        //values.put(ScriptDB.PROPRIETARIO_LOGIN, proprietario.getLogin());
-        //values.put(ScriptDB.PROPRIETARIO_SENHA, proprietario.getSenha());
+        values.put(ScriptDB.PROPRIETARIO_TELEFONE, proprietario.getTelefone());
         values.put(ScriptDB.PROPRIETARIO_EMAIL, proprietario.getEmail());
 
-        resultado = database.insert(ScriptDB.TAB_PROPRIETARIO, null, values);
+        resultado = database.insert(ScriptDB.TAB_PROPRIETARIO_NOVO, null, values);
         database.close();
 
         if (resultado ==-1)
@@ -39,9 +38,9 @@ public class ProprietarioDao extends DBDao {
 
     public Cursor carregarPerfil(){
         Cursor cursor;
-        String[] campos = {ScriptDB.PROPRIETARIO_NOME, ScriptDB.PROPRIETARIO_LOGIN};
+        String[] campos = {ScriptDB.PROPRIETARIO_NOME, ScriptDB.PROPRIETARIO_TELEFONE};
         database = this.readableDB();
-        cursor = database.rawQuery("SELECT id as _id, nome, login FROM " + ScriptDB.TAB_PROPRIETARIO, null);
+        cursor = database.rawQuery("SELECT _id, nome, telefone FROM " + ScriptDB.TAB_PROPRIETARIO_NOVO, null);
         if(cursor!=null){
             cursor.moveToFirst();
         }
@@ -52,7 +51,7 @@ public class ProprietarioDao extends DBDao {
     public Cursor retornarProprietario(int id){
         Cursor cursor;
         database = this.readableDB();
-        cursor = database.rawQuery("SELECT id as _id, nome, email FROM "+ScriptDB.TAB_PROPRIETARIO +
+        cursor = database.rawQuery("SELECT _id, nome, email, telefone FROM "+ScriptDB.TAB_PROPRIETARIO_NOVO +
                 " WHERE _id = ?", new String[]{String.valueOf(id)});
         if(cursor!=null){
             cursor.moveToFirst();
@@ -62,7 +61,7 @@ public class ProprietarioDao extends DBDao {
 
     }
 
-    public void update(int id, String nome, String email){
+    public void update(int id, String nome, String email, String telefone){
         ContentValues valores;
         String where;
         this.open();
@@ -71,8 +70,9 @@ public class ProprietarioDao extends DBDao {
         valores = new ContentValues();
         valores.put(ScriptDB.PROPRIETARIO_NOME,nome);
         valores.put(ScriptDB.PROPRIETARIO_EMAIL,email);
+        valores.put(ScriptDB.PROPRIETARIO_TELEFONE, telefone);
 
-        database.update(ScriptDB.TAB_PROPRIETARIO,valores,where,null);
+        database.update(ScriptDB.TAB_PROPRIETARIO_NOVO,valores,where,null);
         database.close();
 
 

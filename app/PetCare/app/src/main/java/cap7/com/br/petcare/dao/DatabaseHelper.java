@@ -12,7 +12,7 @@ import cap7.com.br.petcare.Util.ScriptDB;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     // Current version of database
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 5;
 
     private static DatabaseHelper instance;
 
@@ -35,8 +35,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS" + ScriptDB.TAB_PROPRIETARIO);
-        db.execSQL("DROP TABLE IF EXISTS" + ScriptDB.TAB_ANIMAL);
+        db.execSQL("DROP TABLE IF EXISTS " + ScriptDB.TAB_PROPRIETARIO_NOVO);
+        db.execSQL("DROP TABLE IF EXISTS " + ScriptDB.TAB_ANIMAL);
         onCreate(db);
     }
 }
