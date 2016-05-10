@@ -23,7 +23,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editTextNomeProprietarioAlterar"
+        android:id="@+id/edtNomeProprietarioAlterar"
         android:layout_below="@+id/txtNomeProprietarioAlterar"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -35,7 +35,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/txt_email_proprietario"
         android:id="@+id/txtEmailProprietarioAlterar"
-        android:layout_below="@+id/editTextNomeProprietarioAlterar"
+        android:layout_below="@+id/edtNomeProprietarioAlterar"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="51dp" />
@@ -43,8 +43,28 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editTextEmailProprietarioAlterar"
+        android:id="@+id/edtEmailProprietarioAlterar"
         android:layout_below="@+id/txtEmailProprietarioAlterar"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/txt_tel_proprietario"
+        android:id="@+id/txtTelProprietarioAlterar"
+        android:layout_below="@+id/edtEmailProprietarioAlterar"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="51dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/edtTelProprietarioAlterar"
+        android:layout_below="@+id/txtTelProprietarioAlterar"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"

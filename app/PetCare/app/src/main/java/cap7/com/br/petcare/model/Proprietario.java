@@ -11,6 +11,7 @@ public class Proprietario {
     private String nome;
     private String login;
     private String senha;
+    private String telefone;
     //facebook
     private String email;
     private ArrayList<Animal> animais;
@@ -61,5 +62,13 @@ public class Proprietario {
 
     public void setAnimais(ArrayList<Animal> animais) {
         this.animais = animais;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
     }
 }

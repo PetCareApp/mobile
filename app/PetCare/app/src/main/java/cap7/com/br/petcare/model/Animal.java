@@ -1,11 +1,11 @@
 package cap7.com.br.petcare.model;
 
-import java.util.Date;
+import java.io.Serializable;
 
 /**
  * Created by Virginia on 28/02/2016.
  */
-public class Animal {
+public class Animal implements Serializable {
 
     private Integer id;
 

@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="1"
-    tools:context=".activity.AnimalActivity">
+    tools:context="cap7.com.br.petcare.activity.AlterarAnimalActivity">
 
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/scrollPetAdd" >
+        android:id="@+id/scrollPetAlt" >
 
         <LinearLayout
             android:orientation="vertical"
@@ -22,36 +21,36 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/txt_nome_pet"
-                android:id="@+id/txtPetNome" />
+                android:id="@+id/txtPetAltNome" />
 
             <EditText
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
-                android:id="@+id/editPetNome" />
+                android:id="@+id/editPetAltNome" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/txt_raca_pet"
-                android:id="@+id/txtPetRaca" />
+                android:id="@+id/txtPetAltRaca" />
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/editPetRaca"
+                android:id="@+id/editPetAltRaca"
                 android:inputType="text" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/txt_cor_pet"
-                android:id="@+id/txtPetCor" />
+                android:id="@+id/txtPetAltCor" />
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/editPetCor"
+                android:id="@+id/editPetAltCor"
                 android:inputType="text" />
 
         </LinearLayout>
@@ -61,18 +60,11 @@
         android:layout_width="346dp"
         android:layout_height="28dp"
         android:text="@string/btn_salvar_pet"
-        android:id="@+id/btnPetSalvar"
+        android:id="@+id/btnPetAltSalvar"
         android:layout_gravity="center_horizontal"
         android:background="#50b1c7"
-        android:onClick="salvarAnimal" />
+        android:layout_below="@+id/scrollPetAlt"
+        android:layout_centerHorizontal="true" />
 
-    <Button
-        android:layout_width="346dp"
-        android:layout_height="20dp"
-        android:text="New Button"
-        android:layout_marginTop="8dp"
-        android:layout_gravity="center_horizontal"
-        android:background="#50b1c7"
-        android:id="@+id/buttonTeste" />
 
-</LinearLayout>
+</RelativeLayout>
