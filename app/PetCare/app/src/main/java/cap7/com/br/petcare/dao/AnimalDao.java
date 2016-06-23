@@ -84,4 +84,16 @@ public class AnimalDao extends DBDao {
 
     }
 
+
+    public void delete(int id){
+        ContentValues valores;
+        String where;
+        this.open();
+        database = this.readableDB();
+        where = ScriptDB.ANIMAL_ID + "=" +id;
+
+        database.delete(ScriptDB.TAB_ANIMAL, where, null);
+        database.close();
+
+    }
 }

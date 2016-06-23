@@ -14,6 +14,12 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+
 import cap7.com.br.petcare.R;
 import cap7.com.br.petcare.Util.Contrato;
 
@@ -31,6 +37,10 @@ public class MainActivity extends AppCompatActivity {
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
 
+    //google maps API
+    GoogleMap mGoogleMap;
+    LatLng mOrigem;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +52,13 @@ public class MainActivity extends AppCompatActivity {
         email = preferences.getString(Contrato.EMAIL_PROPRIETARIO_PREF, null);
         //end-preferences
 
+        //startando de uma localização pre-definida com API do gmaps.
+        SupportMapFragment fragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mGoogleMap = fragment.getMap();
+        mGoogleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        mOrigem = new LatLng(-23.561706, -46.655981);
+        atualizarMapa();
         // Initializing Toolbar and setting it as the actionbar
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -166,6 +183,15 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    //Metodo que vai receber as coordenadas de onde ficarao os petshops.
+    private void atualizarMapa(){
+        mGoogleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(mOrigem, 17.0f));
+        mGoogleMap.addMarker(new MarkerOptions()
+        .position(mOrigem)
+        .title("petshop av. paulista")
+        .snippet("São Paulo"));
     }
 
 
