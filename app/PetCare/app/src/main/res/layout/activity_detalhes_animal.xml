@@ -53,4 +53,24 @@
         android:background="#50b1c7"
          />
 
+    <Button
+        android:layout_marginTop="16dp"
+        android:layout_width="346dp"
+        android:layout_height="28dp"
+        android:text="@string/btn_Del_Pet"
+        android:id="@+id/btnPetExcluir"
+        android:layout_gravity="center_horizontal"
+        android:background="#50b1c7"
+        />
+
+    <Button
+        android:layout_marginTop="16dp"
+        android:layout_width="346dp"
+        android:layout_height="28dp"
+        android:text="VoltarTeste"
+        android:id="@+id/btnPetVoltar"
+        android:layout_gravity="center_horizontal"
+        android:background="#50b1c7"
+        />
+
 </LinearLayout>

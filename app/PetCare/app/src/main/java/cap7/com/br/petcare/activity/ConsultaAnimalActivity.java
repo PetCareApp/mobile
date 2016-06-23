@@ -41,7 +41,7 @@ public class ConsultaAnimalActivity extends AppCompatActivity  {
         AnimalCursorAdapter adapter = new AnimalCursorAdapter(getBaseContext(),cursor,0);
 
         lista.setAdapter(adapter);
-        //adaptador.notifyDataSetChanged();
+        adaptador.notifyDataSetChanged();
         lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
