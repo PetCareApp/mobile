@@ -131,6 +131,7 @@
         android:background="@drawable/buttonlogar"
         android:shadowColor="#C8ED0E"
         android:text="Entrar"
+        android:id="@+id/btnLogar"
         android:shadowDx="0"
         android:shadowDy="0"
         android:shadowRadius="5"

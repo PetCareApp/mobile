@@ -2,6 +2,7 @@ package cap7.com.br.petcare.activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -11,6 +12,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.BaseAdapter;
+import android.widget.HeaderViewListAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +26,9 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import cap7.com.br.petcare.R;
 import cap7.com.br.petcare.Util.Contrato;
+import cap7.com.br.petcare.Util.ScriptDB;
+import cap7.com.br.petcare.dao.AnimalDao;
+import cap7.com.br.petcare.model.Animal;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,10 +39,14 @@ public class MainActivity extends AppCompatActivity {
     String email;
     int id;
 
+    private AnimalDao animalDao;
+    private Animal animal;
+
     //profile
     private Toolbar toolbar;
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
+    private Menu menu;
 
     //google maps API
     GoogleMap mGoogleMap;
@@ -45,12 +56,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //preferences
+        //adicionando no sharedpreferences
         preferences = getSharedPreferences(Contrato.PREF_SETTINGS, 0);
         nome = preferences.getString(Contrato.NOME_PROPRIETARIO_PREF, null);
         id = preferences.getInt(Contrato.ID_PROPRIETARIO_PREF, -1);
         email = preferences.getString(Contrato.EMAIL_PROPRIETARIO_PREF, null);
-        //end-preferences
+
 
         //startando de uma localização pre-definida com API do gmaps.
         SupportMapFragment fragment = (SupportMapFragment) getSupportFragmentManager()
@@ -65,6 +76,31 @@ public class MainActivity extends AppCompatActivity {
 
         //Initializing NavigationView
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
+
+        //adicionando menu dinamico com os animais carregados da base.
+        menu = navigationView.getMenu();
+
+        animalDao = new AnimalDao(getBaseContext());
+        final Cursor cursor = animalDao.carregarAnimais();
+
+        do {
+        String idString =  cursor.getString(cursor.getColumnIndexOrThrow(ScriptDB.ANIMAL_ID));
+        int idAnimal = (Integer.valueOf(idString));
+        String nomeAnimal = cursor.getString(cursor.getColumnIndexOrThrow(ScriptDB.ANIMAL_NOME));
+        menu.add(1, idAnimal, Menu.NONE, nomeAnimal).setIcon(R.drawable.ic_pets_black_24dp);
+        } while (cursor.moveToNext());
+
+        //notifica a barra de navigation que tem novos animais adicionados.
+        for (int i = 0, count = navigationView.getChildCount(); i < count; i++) {
+            final View child = navigationView.getChildAt(i);
+            if (child != null && child instanceof ListView) {
+                final ListView menuView = (ListView) child;
+                final HeaderViewListAdapter mAdapter = (HeaderViewListAdapter) menuView.getAdapter();
+                final BaseAdapter wrapped = (BaseAdapter) mAdapter.getWrappedAdapter();
+                wrapped.notifyDataSetChanged();
+            }
+        }
+
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             // This method will trigger on item Click of navigation menu
             @Override
@@ -101,8 +137,19 @@ public class MainActivity extends AppCompatActivity {
                         finish();
                         return true;
                     default:
-                        Toast.makeText(getApplicationContext(), "Erro na seleção do menu.", Toast.LENGTH_SHORT).show();
-                        return true;
+                        // se não clicar nos menus staticos, vai pros dinamicos.
+                        try {
+                        animal = animalDao.recuperarAnimal(menuItem.getItemId());
+                        Intent itAnimal = new Intent(MainActivity.this, DetalhesAnimalActivity.class);
+                        itAnimal.putExtra("idAnimal", Integer.valueOf(animal.getId()));
+                        itAnimal.putExtra("nomeAnimal", animal.getNome());
+                        startActivity(itAnimal);
+                        } catch (Exception e) {
+                            Toast.makeText(getApplicationContext(), "Erro ao selecionar o menu.", Toast.LENGTH_SHORT).show();
+                        } finally {
+                            return true;
+                        }
+
                 }
             }
         });
@@ -113,7 +160,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDrawerClosed(View drawerView) {
                 // Code here will be triggered once the drawer closes as we dont want anything to happen so we leave this blank
+
                 super.onDrawerClosed(drawerView);
+
             }
 
             @Override
@@ -123,6 +172,15 @@ public class MainActivity extends AppCompatActivity {
                 txtNomeProprietario.setText(nome);
                 txtNomeProprietario = (TextView) findViewById(R.id.lblProprietarioEmailPerfil);
                 txtNomeProprietario.setText(email);
+                for (int i = 0, count = navigationView.getChildCount(); i < count; i++) {
+                    final View child = navigationView.getChildAt(i);
+                    if (child != null && child instanceof ListView) {
+                        final ListView menuView = (ListView) child;
+                        final HeaderViewListAdapter mAdapter = (HeaderViewListAdapter) menuView.getAdapter();
+                        final BaseAdapter wrapped = (BaseAdapter) mAdapter.getWrappedAdapter();
+                        wrapped.notifyDataSetChanged();
+                    }
+                }
                 //end-perfilnome e email
                 //Ao abrir o navigation fazer algo, se não quiser nada, deixar em branco.
                 super.onDrawerOpened(drawerView);
@@ -154,6 +212,31 @@ public class MainActivity extends AppCompatActivity {
          super.onResume();
          nome = preferences.getString(Contrato.NOME_PROPRIETARIO_PREF, null);
          id = preferences.getInt(Contrato.ID_PROPRIETARIO_PREF, -1);
+         //Initializing NavigationView
+         navigationView = (NavigationView) findViewById(R.id.navigation_view);
+
+         //adicionando menu dinamico com os animais carregados da base.
+         menu = navigationView.getMenu();
+
+         animalDao = new AnimalDao(getBaseContext());
+         final Cursor cursor = animalDao.carregarAnimais();
+         menu.removeGroup(1);
+         do {
+             String idString =  cursor.getString(cursor.getColumnIndexOrThrow(ScriptDB.ANIMAL_ID));
+             int idAnimal = (Integer.valueOf(idString));
+             String nomeAnimal = cursor.getString(cursor.getColumnIndexOrThrow(ScriptDB.ANIMAL_NOME));
+             menu.add(1, idAnimal, Menu.NONE, nomeAnimal).setIcon(R.drawable.ic_pets_black_24dp);
+         } while (cursor.moveToNext());
+
+         for (int i = 0, count = navigationView.getChildCount(); i < count; i++) {
+             final View child = navigationView.getChildAt(i);
+             if (child != null && child instanceof ListView) {
+                 final ListView menuView = (ListView) child;
+                 final HeaderViewListAdapter mAdapter = (HeaderViewListAdapter) menuView.getAdapter();
+                 final BaseAdapter wrapped = (BaseAdapter) mAdapter.getWrappedAdapter();
+                 wrapped.notifyDataSetChanged();
+             }
+         }
      }
 
      @Override
@@ -161,6 +244,31 @@ public class MainActivity extends AppCompatActivity {
          super.onRestart();
          nome = preferences.getString(Contrato.NOME_PROPRIETARIO_PREF, null);
          id = preferences.getInt(Contrato.ID_PROPRIETARIO_PREF, -1);
+         //Initializing NavigationView
+         navigationView = (NavigationView) findViewById(R.id.navigation_view);
+
+         //adicionando menu dinamico com os animais carregados da base.
+         menu = navigationView.getMenu();
+
+         animalDao = new AnimalDao(getBaseContext());
+         final Cursor cursor = animalDao.carregarAnimais();
+         menu.removeGroup(1);
+         do {
+             String idString =  cursor.getString(cursor.getColumnIndexOrThrow(ScriptDB.ANIMAL_ID));
+             int idAnimal = (Integer.valueOf(idString));
+             String nomeAnimal = cursor.getString(cursor.getColumnIndexOrThrow(ScriptDB.ANIMAL_NOME));
+             menu.add(1, idAnimal, Menu.NONE, nomeAnimal).setIcon(R.drawable.ic_pets_black_24dp);
+         } while (cursor.moveToNext());
+
+         for (int i = 0, count = navigationView.getChildCount(); i < count; i++) {
+             final View child = navigationView.getChildAt(i);
+             if (child != null && child instanceof ListView) {
+                 final ListView menuView = (ListView) child;
+                 final HeaderViewListAdapter mAdapter = (HeaderViewListAdapter) menuView.getAdapter();
+                 final BaseAdapter wrapped = (BaseAdapter) mAdapter.getWrappedAdapter();
+                 wrapped.notifyDataSetChanged();
+             }
+         }
      }
 
     @Override
