@@ -74,32 +74,8 @@ public class MainActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        //Initializing NavigationView
-        navigationView = (NavigationView) findViewById(R.id.navigation_view);
-
-        //adicionando menu dinamico com os animais carregados da base.
-        menu = navigationView.getMenu();
-
-        animalDao = new AnimalDao(getBaseContext());
-        final Cursor cursor = animalDao.carregarAnimais();
-
-        do {
-        String idString =  cursor.getString(cursor.getColumnIndexOrThrow(ScriptDB.ANIMAL_ID));
-        int idAnimal = (Integer.valueOf(idString));
-        String nomeAnimal = cursor.getString(cursor.getColumnIndexOrThrow(ScriptDB.ANIMAL_NOME));
-        menu.add(1, idAnimal, Menu.NONE, nomeAnimal).setIcon(R.drawable.ic_pets_black_24dp);
-        } while (cursor.moveToNext());
-
-        //notifica a barra de navigation que tem novos animais adicionados.
-        for (int i = 0, count = navigationView.getChildCount(); i < count; i++) {
-            final View child = navigationView.getChildAt(i);
-            if (child != null && child instanceof ListView) {
-                final ListView menuView = (ListView) child;
-                final HeaderViewListAdapter mAdapter = (HeaderViewListAdapter) menuView.getAdapter();
-                final BaseAdapter wrapped = (BaseAdapter) mAdapter.getWrappedAdapter();
-                wrapped.notifyDataSetChanged();
-            }
-        }
+        //carregar o menu dos pets
+        atualizarMenu();
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             // This method will trigger on item Click of navigation menu
@@ -167,7 +143,6 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onDrawerOpened(View drawerView) {
-                //Perfil nome e email
                 txtNomeProprietario = (TextView) findViewById(R.id.lblProprietarioNomePerfil);
                 txtNomeProprietario.setText(nome);
                 txtNomeProprietario = (TextView) findViewById(R.id.lblProprietarioEmailPerfil);
@@ -181,7 +156,6 @@ public class MainActivity extends AppCompatActivity {
                         wrapped.notifyDataSetChanged();
                     }
                 }
-                //end-perfilnome e email
                 //Ao abrir o navigation fazer algo, se não quiser nada, deixar em branco.
                 super.onDrawerOpened(drawerView);
             }
@@ -190,21 +164,6 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout.setDrawerListener(actionBarDrawerToggle);
         //calling sync state is necessay or else your icon wont show up
         actionBarDrawerToggle.syncState();
-
-         // ACABA AQUI COMECA AQUI
-      /*   txtNomeProprietario = (TextView) findViewById(R.id.lblProprietarioNomePerfil);
-         txtNomeProprietario.setText(nome);
-
-         txtNomeProprietario.setOnClickListener(new View.OnClickListener() {
-             @Override
-             public void onClick(View v) {
-                 Intent it = new Intent(MainActivity.this, ConsultaPerfilActivity.class);
-                 it.putExtra("id", id);
-                 startActivity(it);
-                 finish();
-             }
-         }); */
-
      }
 
      @Override
@@ -212,31 +171,7 @@ public class MainActivity extends AppCompatActivity {
          super.onResume();
          nome = preferences.getString(Contrato.NOME_PROPRIETARIO_PREF, null);
          id = preferences.getInt(Contrato.ID_PROPRIETARIO_PREF, -1);
-         //Initializing NavigationView
-         navigationView = (NavigationView) findViewById(R.id.navigation_view);
-
-         //adicionando menu dinamico com os animais carregados da base.
-         menu = navigationView.getMenu();
-
-         animalDao = new AnimalDao(getBaseContext());
-         final Cursor cursor = animalDao.carregarAnimais();
-         menu.removeGroup(1);
-         do {
-             String idString =  cursor.getString(cursor.getColumnIndexOrThrow(ScriptDB.ANIMAL_ID));
-             int idAnimal = (Integer.valueOf(idString));
-             String nomeAnimal = cursor.getString(cursor.getColumnIndexOrThrow(ScriptDB.ANIMAL_NOME));
-             menu.add(1, idAnimal, Menu.NONE, nomeAnimal).setIcon(R.drawable.ic_pets_black_24dp);
-         } while (cursor.moveToNext());
-
-         for (int i = 0, count = navigationView.getChildCount(); i < count; i++) {
-             final View child = navigationView.getChildAt(i);
-             if (child != null && child instanceof ListView) {
-                 final ListView menuView = (ListView) child;
-                 final HeaderViewListAdapter mAdapter = (HeaderViewListAdapter) menuView.getAdapter();
-                 final BaseAdapter wrapped = (BaseAdapter) mAdapter.getWrappedAdapter();
-                 wrapped.notifyDataSetChanged();
-             }
-         }
+         atualizarMenu();
      }
 
      @Override
@@ -244,31 +179,7 @@ public class MainActivity extends AppCompatActivity {
          super.onRestart();
          nome = preferences.getString(Contrato.NOME_PROPRIETARIO_PREF, null);
          id = preferences.getInt(Contrato.ID_PROPRIETARIO_PREF, -1);
-         //Initializing NavigationView
-         navigationView = (NavigationView) findViewById(R.id.navigation_view);
-
-         //adicionando menu dinamico com os animais carregados da base.
-         menu = navigationView.getMenu();
-
-         animalDao = new AnimalDao(getBaseContext());
-         final Cursor cursor = animalDao.carregarAnimais();
-         menu.removeGroup(1);
-         do {
-             String idString =  cursor.getString(cursor.getColumnIndexOrThrow(ScriptDB.ANIMAL_ID));
-             int idAnimal = (Integer.valueOf(idString));
-             String nomeAnimal = cursor.getString(cursor.getColumnIndexOrThrow(ScriptDB.ANIMAL_NOME));
-             menu.add(1, idAnimal, Menu.NONE, nomeAnimal).setIcon(R.drawable.ic_pets_black_24dp);
-         } while (cursor.moveToNext());
-
-         for (int i = 0, count = navigationView.getChildCount(); i < count; i++) {
-             final View child = navigationView.getChildAt(i);
-             if (child != null && child instanceof ListView) {
-                 final ListView menuView = (ListView) child;
-                 final HeaderViewListAdapter mAdapter = (HeaderViewListAdapter) menuView.getAdapter();
-                 final BaseAdapter wrapped = (BaseAdapter) mAdapter.getWrappedAdapter();
-                 wrapped.notifyDataSetChanged();
-             }
-         }
+         atualizarMenu();
      }
 
     @Override
@@ -300,6 +211,36 @@ public class MainActivity extends AppCompatActivity {
         .position(mOrigem)
         .title("petshop av. paulista")
         .snippet("São Paulo"));
+    }
+
+    public void atualizarMenu(){
+        //Initializing NavigationView
+        navigationView = (NavigationView) findViewById(R.id.navigation_view);
+
+        //adicionando menu dinamico com os animais carregados da base.
+        menu = navigationView.getMenu();
+
+        animalDao = new AnimalDao(getBaseContext());
+        final Cursor cursor = animalDao.carregarAnimais();
+        menu.removeGroup(1);
+        if (cursor.getCount() > 0){
+            do {
+                String idString =  cursor.getString(cursor.getColumnIndexOrThrow(ScriptDB.ANIMAL_ID));
+                int idAnimal = (Integer.valueOf(idString));
+                String nomeAnimal = cursor.getString(cursor.getColumnIndexOrThrow(ScriptDB.ANIMAL_NOME));
+                menu.add(1, idAnimal, Menu.NONE, nomeAnimal).setIcon(R.drawable.ic_pets_black_24dp);
+            } while (cursor.moveToNext());
+        }
+
+        for (int i = 0, count = navigationView.getChildCount(); i < count; i++) {
+            final View child = navigationView.getChildAt(i);
+            if (child != null && child instanceof ListView) {
+                final ListView menuView = (ListView) child;
+                final HeaderViewListAdapter mAdapter = (HeaderViewListAdapter) menuView.getAdapter();
+                final BaseAdapter wrapped = (BaseAdapter) mAdapter.getWrappedAdapter();
+                wrapped.notifyDataSetChanged();
+            }
+        }
     }
 
 
