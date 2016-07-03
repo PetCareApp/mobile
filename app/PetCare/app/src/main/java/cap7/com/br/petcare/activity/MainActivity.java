@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     String email;
     int id;
 
-    //profile
+    //profiile
     private Toolbar toolbar;
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
