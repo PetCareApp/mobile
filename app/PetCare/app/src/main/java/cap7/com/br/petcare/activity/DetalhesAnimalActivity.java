@@ -74,7 +74,7 @@ public class DetalhesAnimalActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 preferences = getSharedPreferences(Contrato.PREF_SETTINGS, 0);
-                idAnimalPref = preferences.getInt(Contrato.ID_PROPRIETARIO_PREF, -1);
+                idAnimalPref = preferences.getInt(Contrato.ID_ANIMAL_PREF, -1);
                 animalDao.delete(animal.getId());
                 Intent it = new Intent(DetalhesAnimalActivity.this, ConsultaAnimalActivity.class);
                 startActivity(it);
