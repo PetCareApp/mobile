@@ -1,4 +1,4 @@
-package cap7.com.br.petcare.activity;
+﻿package cap7.com.br.petcare.activity;
 
 import android.app.Dialog;
 import android.app.DialogFragment;

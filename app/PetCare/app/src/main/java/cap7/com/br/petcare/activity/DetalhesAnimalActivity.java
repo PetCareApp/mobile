@@ -76,7 +76,7 @@ public class DetalhesAnimalActivity extends AppCompatActivity {
                 preferences = getSharedPreferences(Contrato.PREF_SETTINGS, 0);
                 idAnimalPref = preferences.getInt(Contrato.ID_ANIMAL_PREF, -1);
                 animalDao.delete(animal.getId());
-                Intent it = new Intent(DetalhesAnimalActivity.this, ConsultaAnimalActivity.class);
+                Intent it = new Intent(DetalhesAnimalActivity.this, MainActivity.class);
                 startActivity(it);
                 finish();
             }
