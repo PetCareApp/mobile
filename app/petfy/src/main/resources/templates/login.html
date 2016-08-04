@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+<head>
+	<title>Petfy - Login</title>
+	
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	
+	<!-- BEGIN STYLESHEETS -->
+	<link th:href="@{https://fonts.googleapis.com/icon?family=Material+Icons}" rel="stylesheet"/>
+	<link rel="stylesheet" th:href="@{/public-resources/css/materialize.min.css}"/>
+	<link rel="stylesheet" th:href="@{/public-resources/css/petfy-login.css}"/>
+	<!-- END STYLESHEETS -->
+</head>
+	
+<body>
+	<div id="wrapper" class="section">
+		<img id="logo" class="responsive-img" th:src="@{/public-resources/img/logo-petfy.png}" />
+		
+		<div class="container z-depth-1 grey lighten-4 row section">
+			<span id="login-invalido" th:if="${param.error}">Email e/ou senha inválidos</span>
+			<form class="col s12" th:action="@{/login}" method="post">
+				<div class="row">
+	              <div class="input-field col s12">
+	                <input class="form-control" type="text" required="required" id="username" name="username"/>
+	                <label for='email'>Email</label>
+	              </div>
+	            </div>
+	            
+	            <div class="row">
+	              <div class="input-field col s12">
+	                <input class="form-control" type="password" required="required" id="password" name="password"/>
+	                <label for="password">Senha</label>
+	              </div>
+	            </div>
+	            
+	            <div class="row">
+	                <button type="submit" name="btn_login" class="col s12 btn btn-large waves-effect teal">Login</button>
+              	</div>
+			</form>
+		</div>
+		
+		<div id="creditos">
+			<span>Desenvolvido por:</span>
+			<img class="responsive-img" th:src="@{/public-resources/img/logo-cap7.png}" />
+		</div>	
+	</div>
+	
+	<footer>
+		<!-- BEGIN JAVASCRIPT -->
+		<script th:src="@{/public-resources/js/jquery-3.1.0.min.js}"></script>
+		<script th:src="@{/public-resources/js/materialize.min.js}"></script>
+		<!-- END JAVASCRIPT -->
+	</footer>
+</body>
+</html>
