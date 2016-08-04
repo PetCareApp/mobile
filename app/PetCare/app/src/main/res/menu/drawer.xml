@@ -14,13 +14,19 @@
             android:icon="@drawable/ic_pets_black_24dp"
             android:title="@string/txt_profile_meuspets" />
 
-        <item
-            android:id="@+id/profile_add_pets"
-            android:checked="false"
-            android:icon="@drawable/ic_add_box_black_24dp"
-            android:title="@string/txt_profile_addpets" />
+
 
     </group>
 
+    <item android:title="Meus Pets">
+        <menu>
+            <item
+                android:id="@+id/profile_add_pets"
+                android:checked="false"
+                android:icon="@drawable/ic_add_box_black_24dp"
+                android:title="@string/txt_profile_addpets" />
+        </menu>
+    </item>
 
 </menu>
+

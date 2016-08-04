@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".activity.AnimalActivity"
     android:weightSum="1"
-    android:background="#ec0f63ad"
+    android:background="@drawable/bdheader"
     android:baselineAligned="false"
     android:clickable="true">
 
@@ -47,15 +47,6 @@
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/txtTelProprietario" />
 
-        <ImageView
-            android:id="@+id/imgCadastrarProprietario"
-            android:src="@mipmap/iconcheck"
-            android:layout_width="43dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginBottom="16dp"
-            android:layout_marginRight="45dp"
-            android:layout_gravity="center" />
     </FrameLayout>
 
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -123,7 +114,7 @@
         android:paddingLeft="50dp"
         android:paddingRight="50dp"
         android:hint="@string/txt_tel_proprietario"
-        android:id="@+id/edtProprietario"
+        android:id="@+id/edtTelProprietario"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
@@ -131,14 +122,23 @@
         android:backgroundTint="#e6ff00"
         android:textColorHint="#ffffff"
         android:textColor="#ffffff" />
+
     </FrameLayout>
 
     <Button
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Button"
-        android:id="@+id/button"
-        android:background="#ec0f63ad"
-        android:textColor="#ffffff" />
+        android:background="@drawable/buttonlogar"
+        android:shadowColor="#C8ED0E"
+        android:text="Entrar"
+        android:id="@+id/btnLogar"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="5"
+        android:textColor="#FFFFFF"
+        android:textSize="25sp"
+        android:elegantTextHeight="true"
+        />
+
 
 </LinearLayout>

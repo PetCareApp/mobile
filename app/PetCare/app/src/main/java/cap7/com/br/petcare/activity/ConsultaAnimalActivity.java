@@ -52,7 +52,7 @@ public class ConsultaAnimalActivity extends AppCompatActivity  {
                 //armazenar no prefs
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putString(Contrato.ID_ANIMAL_PREF, String.valueOf(codigo));
-                editor.putString(Contrato.NOME_PROPRIETARIO_PREF, nome);
+                editor.putString(Contrato.NOME_ANIMAL_PREF, nome);
                 editor.commit();
 
                 Intent itAnimal = new Intent(ConsultaAnimalActivity.this, DetalhesAnimalActivity.class);
