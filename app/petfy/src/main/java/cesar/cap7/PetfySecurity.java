@@ -10,6 +10,9 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import static cesar.cap7.petfy.util.Constants.PAPEL_ADMIN;
+import static cesar.cap7.petfy.util.Constants.PAPEL_PROPRIETARIO;
+
 @Configuration
 @EnableWebSecurity
 @ComponentScan
@@ -23,8 +26,8 @@ public class PetfySecurity extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()
 			.antMatchers("/").authenticated()
 			.antMatchers("/public-resources/**").permitAll()
-			.antMatchers("/proprietario/**").hasAuthority("PROPRIETARIO").anyRequest().authenticated()
-			.antMatchers("/admin/**").hasAuthority("ADMINISTRACAO").anyRequest().authenticated()
+			.antMatchers("/proprietario/**").hasAuthority(PAPEL_PROPRIETARIO).anyRequest().authenticated()
+			.antMatchers("/admin/**").hasAuthority(PAPEL_ADMIN).anyRequest().authenticated()
 			.and()
 				.formLogin().loginProcessingUrl("/login").loginPage("/login").permitAll()
 			.and()

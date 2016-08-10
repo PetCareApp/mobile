@@ -20,7 +20,7 @@ public class Proprietario {
 	@Column(unique = true)
 	private String email;
 	
-	@OneToOne(cascade = CascadeType.REMOVE)
+	@OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
 	private Usuario usuario;
 
 	public Integer getId() {
