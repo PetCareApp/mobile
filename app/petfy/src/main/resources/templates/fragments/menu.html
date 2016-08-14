@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:fragment="imports">
+	<meta charset="utf-8"/>
+	
+	<!-- BEGIN STYLESHEETS -->
+	<link th:href="@{https://fonts.googleapis.com/icon?family=Material+Icons}" rel="stylesheet"/>
+	<link rel="stylesheet" th:href="@{/public-resources/css/materialize.min.css}"/>
+	<link rel="stylesheet" th:href="@{/css/petfy.css}"/>
+	<!-- END STYLESHEETS -->
+</head>
+
+<nav class="navbar-fixed" th:fragment="menu">
+	<div class="nav-wrapper teal lighten-1">
+		<ul id="nav-mobile" class="left hide-on-med-and-down">
+			<li sec:authorize="hasAuthority('PROPRIETARIO')"><a th:href="@{/proprietario}">Meus Estabelecimentos</a></li>
+			<li sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/admin/estabelecimento/}">Estabelecimentos</a></li>
+			<li sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/admin/proprietario/}">Proprietários</a></li>
+			<li sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/admin/tipo-servico/}">Tipos de Serviços</a></li>
+			<li><a th:href="@{/logout}">Sair</a></li>
+		</ul>
+	</div>
+</nav>
+
+<footer th:fragment="footer">
+	<!-- BEGIN JAVASCRIPT -->
+	<script th:src="@{/public-resources/js/jquery-3.1.0.min.js}"></script>
+	<script th:src="@{/public-resources/js/materialize.min.js}"></script>
+	<script th:src="@{/js/petfy.js}"></script>
+	<!-- END JAVASCRIPT -->
+</footer>
+
+</html>

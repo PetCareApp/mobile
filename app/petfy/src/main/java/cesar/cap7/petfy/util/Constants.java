@@ -32,7 +32,7 @@ public class Constants {
 	
 	public static String REDIRECT_PAGE_ADMIN_TIPO_SERVICO = "redirect:/admin/tipo-servico/";
 	
-	public static String REDIRECT_PAGE_PROP_DETALHE_ESTABELECIMENTO = "redirect:/proprietario/detalhe";
+	public static String REDIRECT_PAGE_PROP_DETALHE_ESTABELECIMENTO = "redirect:/proprietario/estabelecimento/";
 	
 	public static String REDIRECT_PAGE_PROP_LISTAR_ESTABELECIMENTOS = "redirect:/proprietario/listar";
 	

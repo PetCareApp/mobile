@@ -1,40 +1,24 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
-<head>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:replace="fragments/menu :: imports">
 	<meta charset="utf-8"/>
 	<title>Petfy - Serviços</title>
-	
-	<!-- BEGIN STYLESHEETS -->
-	<link th:href="@{https://fonts.googleapis.com/icon?family=Material+Icons}" rel="stylesheet"/>
-	<link rel="stylesheet" th:href="@{/public-resources/css/materialize.min.css}"/>
-	<link rel="stylesheet" th:href="@{/css/petfy.css}"/>
-	<!-- END STYLESHEETS -->
-	
 </head>
 <body>
-	<nav class="navbar-fixed">
-	    <div class="nav-wrapper teal lighten-1">
-	      <ul id="nav-mobile" class="left hide-on-med-and-down">
-	        <li><a th:href="@{/admin/estabelecimento/}">Estabelecimentos</a></li>
-	        <li><a th:href="@{/admin/proprietario/}">Proprietários</a></li>
-	        <li><a th:href="@{/admin/tipo-servico/}">Tipos de Serviços</a></li>
-	      </ul>
-	    </div>
-	  </nav>
+	<nav class="navbar-fixed" th:replace="fragments/menu :: menu"></nav>
   
 	<div class="container">
       <div class="row">
         <div class="col s12">
           <div class="card">
             <div class="card-content">
-              <span class="card-title">Estabelecimentos</span>
+              <span class="card-title" sec:authorize="hasAuthority('DIRECAO')">Estabelecimentos</span>
 				<table>
 					<thead>
 						<tr>
 							<th data-field="estabelecimento">Estabelecimento</th>
 							<th data-field="endereco">Endereço</th>
 							<th data-field="localizacao">Localização</th>
-							<th data-field="status">Status</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -42,7 +26,6 @@
 							<td><a th:text="${est.nome}" th:href="@{/proprietario/estabelecimento/} + ${est.id}"></a></td>
 							<td th:text="${est.endereco} + ', ' + ${est.bairro} + ', ' + ${est.cidade} + '-' + ${est.estado}"></td>
 							<td th:text="${est.latitude} + ' | ' + ${est.longitude}"></td>
-							<td th:text="${est.habilitado}"></td>
 						</tr>
 					</tbody>
 				</table>
@@ -55,7 +38,7 @@
         	<div class="col s6">
 	        	<div class="card">
 	        		<div class="card-content">
-	        			<span class="card-title" th:text="${estabelecimento.nome}"></span>
+	        			<span class="card-title" th:text="${estabelecimento.nome} + ' - Serviços'"></span>
 						<table>
 							<thead>
 								<tr>
@@ -93,9 +76,17 @@
 									<input id="preco" type="text" class="validate" th:field="*{preco}" required="required"/>
 									<label for="preco">Preço</label>
 								</div>
-								<div class="input-field col s4">
+								<!-- <div class="input-field col s4">
 									<select>
-										<option th:each="tipo : ${tipos}" th:value="${tipo}" th:text="${tipo.nome}"></option>
+										<option value="" disabled selected>Choose your option</option>
+										<option value="1">Option 1</option>
+										<option value="2">Option 2</option>
+										<option value="3">Option 3</option>
+									</select>
+								</div> -->
+								<div class="input-field col s4">
+									<select id="tipo" th:field="*{tipo.id}">
+										<option th:each="t : ${tipos}" th:value="${t.id}" th:text="${t.nome}"></option>
 									</select>
 									<label for="tipo">Tipo</label>
 								</div>
@@ -112,11 +103,6 @@
       	</div>
 	</div> <!-- /container -->
 	
-	<footer>
-		<!-- BEGIN JAVASCRIPT -->
-		<script th:src="@{/public-resources/js/jquery-3.1.0.min.js}"></script>
-		<script th:src="@{/public-resources/js/materialize.min.js}"></script>
-		<!-- END JAVASCRIPT -->
-	</footer>
+	<footer th:replace="fragments/menu :: footer"></footer>
 </body>
 </html>

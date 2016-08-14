@@ -45,7 +45,7 @@ public class ProprietarioController {
 		return PAGE_PROP_LISTAR_SERVICO;
 	}
 	
-	@RequestMapping(value = "/cadastrar", method = RequestMethod.POST)
+	@RequestMapping(value = "/servico/cadastrar", method = RequestMethod.POST)
 	public String cadastrarEstabelecimento(@RequestParam("id-est") Integer idEstabelecimento, @ModelAttribute("servico") Servico servico) {
 		servico.setEstabelecimento(estabelecimentoRepository.findOne(idEstabelecimento));
 		servicoRepository.save(servico);

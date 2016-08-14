@@ -1,26 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
-<head>
+<head th:replace="fragments/menu :: imports">
 	<meta charset="utf-8"/>
 	<title>Petfy - Tipos de Serviços</title>
 	
-	<!-- BEGIN STYLESHEETS -->
-	<link th:href="@{https://fonts.googleapis.com/icon?family=Material+Icons}" rel="stylesheet"/>
-	<link rel="stylesheet" th:href="@{/public-resources/css/materialize.min.css}"/>
-	<link rel="stylesheet" th:href="@{/css/petfy.css}"/>
-	<!-- END STYLESHEETS -->
-	
 </head>
 <body>
-	<nav class="navbar-fixed">
-	    <div class="nav-wrapper teal lighten-1">
-	      <ul id="nav-mobile" class="left hide-on-med-and-down">
-	        <li><a th:href="@{/admin/estabelecimento/}">Estabelecimentos</a></li>
-	        <li><a th:href="@{/admin/proprietario/}">Proprietários</a></li>
-	        <li><a th:href="@{/admin/tipo-servico/}">Tipos de Serviços</a></li>
-	      </ul>
-	    </div>
-	  </nav>
+	<nav class="navbar-fixed" th:replace="fragments/menu :: menu"></nav>
   
 	<div class="container">
       <div class="row">
