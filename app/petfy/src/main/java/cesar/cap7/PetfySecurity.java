@@ -26,6 +26,7 @@ public class PetfySecurity extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()
 			.antMatchers("/").authenticated()
 			.antMatchers("/public-resources/**").permitAll()
+			.antMatchers("/rest/**").permitAll()
 			.antMatchers("/proprietario/**").hasAuthority(PAPEL_PROPRIETARIO).anyRequest().authenticated()
 			.antMatchers("/admin/**").hasAuthority(PAPEL_ADMIN).anyRequest().authenticated()
 			.and()

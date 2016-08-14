@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Estabelecimento {
 	
@@ -32,9 +34,11 @@ public class Estabelecimento {
 	
 	private boolean habilitado;
 	
+	@JsonIgnore
 	@ManyToOne
 	private Proprietario proprietario;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "estabelecimento")
 	private List<Servico> servicos;
 
